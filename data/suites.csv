@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","14739","Landing page 'Send a Message' form validation","chromium","Tue Jul 29 20:42:17 MDT 2025","passed","Tue Jul 29 20:42:32 MDT 2025","Test the dummy site","","",""
+"","9314","Form submission test that will fail","chromium","Tue Jul 29 20:42:17 MDT 2025","failed","Tue Jul 29 20:42:27 MDT 2025","Test the dummy site - Failing Test","","",""
