@@ -1,34 +1,55 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Allure Report</title>
-    <link rel="icon" href="favicon.ico">
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="stylesheet" type="text/css" href="plugin/screen-diff/styles.css">
-</head>
-<body>
-    <div id="alert"></div>
-    <div id="content">
-        <span class="spinner">
-            <span class="spinner__circle"></span>
-        </span>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Playwright Test Reports</title>
+    <style>
+      body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 20px; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+      .login { text-align: center; margin: 60px auto; background: #111827; padding: 32px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-width: 420px; }
+      .title { margin: 0 0 8px; font-size: 24px; }
+      .subtitle { margin: 0 0 20px; color: #94a3b8; font-size: 14px; }
+      input, button { padding: 12px 14px; margin: 8px 0; font-size: 16px; border-radius: 8px; width: 100%; box-sizing: border-box; border: 1px solid #334155; background: #0b1220; color: #e2e8f0; }
+      input:focus { outline: none; border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.2); }
+      button { cursor: pointer; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); border: none; font-weight: 600; }
+      .error { color: #f87171; font-size: 13px; display: none; margin-top: 8px; }
+      .content { display: none; height: calc(100vh - 40px); margin: -20px; }
+      iframe { border: none; width: 100%; height: 100%; }
+    </style>
+  </head>
+  <body>
+    <div id="login" class="login">
+      <div style="font-size:40px;">🔒</div>
+      <h1 class="title">Playwright Test Reports</h1>
+      <p class="subtitle">Enter password to access the latest test results</p>
+      <input type="password" id="password" placeholder="Enter password" onkeypress="if(event.key==='Enter')checkPassword()" />
+      <button onclick="checkPassword()">Access Reports</button>
+      <div id="error" class="error">❌ Incorrect password. Please try again.</div>
     </div>
-    <div id="popup"></div>
-    <script src="app.js"></script>
-    <script src="plugin/behaviors/index.js"></script>
-    <script src="plugin/packages/index.js"></script>
-    <script src="plugin/screen-diff/index.js"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FVWC4GKEYS"></script>
+    <div id="content" class="content">
+      <iframe src="allure-report/index.html"></iframe>
+    </div>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-FVWC4GKEYS', {
-          'allureVersion': '2.34.1',
-          'reportUuid': '1acdb4cc-0b2f-4a77-a58e-712684204293',
-          'single_file': false
-        });
+      function checkPassword() {
+        const password = document.getElementById('password').value;
+        const error = document.getElementById('error');
+        if (password === 'stage pass') {
+          document.getElementById('login').style.display = 'none';
+          document.getElementById('content').style.display = 'block';
+          error.style.display = 'none';
+          // Optional: persist session in memory for this tab
+          sessionStorage.setItem('reports_unlocked', '1');
+        } else {
+          error.style.display = 'block';
+          document.getElementById('password').value = '';
+          document.getElementById('password').focus();
+        }
+      }
+      // Auto-unlock if already unlocked in this tab
+      if (sessionStorage.getItem('reports_unlocked') === '1') {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+      }
     </script>
-</body>
+  </body>
 </html>
