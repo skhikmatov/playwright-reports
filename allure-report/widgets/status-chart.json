@@ -1,1 +1,0 @@
-[{"uid":"163c9765af8e1993","name":"Form submission test that will fail","time":{"start":1755709225007,"stop":1755709225008,"duration":1},"status":"skipped","severity":"normal"},{"uid":"ba21ac297c920099","name":"Landing page 'Send a Message' form validation","time":{"start":1755709225319,"stop":1755709230254,"duration":4935},"status":"passed","severity":"normal"}]
