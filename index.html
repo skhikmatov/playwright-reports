@@ -33,11 +33,10 @@
       function checkPassword() {
         const password = document.getElementById('password').value;
         const error = document.getElementById('error');
-        if (password === 'stage pass') {
+        if (password === 'Password1!') {
           document.getElementById('login').style.display = 'none';
           document.getElementById('content').style.display = 'block';
           error.style.display = 'none';
-          // Optional: persist session in memory for this tab
           sessionStorage.setItem('reports_unlocked', '1');
         } else {
           error.style.display = 'block';
@@ -45,7 +44,6 @@
           document.getElementById('password').focus();
         }
       }
-      // Auto-unlock if already unlocked in this tab
       if (sessionStorage.getItem('reports_unlocked') === '1') {
         document.getElementById('login').style.display = 'none';
         document.getElementById('content').style.display = 'block';
